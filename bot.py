@@ -6,6 +6,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 #prefix 
 bot = commands.Bot(command_prefix="!", intents=intents)
+#Prefix bota verilecek komutların başında bulunacak karakterdir bu karakteri kullandığımız zaman bot komutlarınıza cevap verir ben ! koydum siz başka alternatifler kullanabilirsiniz
 
 #Bot online olduğu zaman print fonksiyonu ile bunu belirtelim
 @bot.event
