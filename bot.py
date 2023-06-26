@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands import has_permissions
+#Gerekli modülleri import ettik ve başlıyoruz.
 
 
 intents = discord.Intents.default()
@@ -26,14 +28,17 @@ async def merhaba(msg):
 
 #Sunucudan kişileri atmak için
 @bot.command()
+@commands.has_permissions(kick_members=True)
 async def kick(ctx, member = discord.Member, *,  reason = 'No reason'):
-    
-    if ctx.message.author.guild_permissions.kick_members  == True:
-        await member.kick(reason=reason)
-        await ctx.send(f'**{member}** was kicked.\nReason: _{reason}_')
+    await member.kick(reason=reason)
+    await ctx.send(f'**{member}** Sunucudan atıldı.\nReason: _{reason}_')
 
-    elif ctx.message.author.guild_permissions.kick_members  == False:
-        await ctx.channel.send('You do not have permissions to do that.')
+@kick.error
+async def kick_error(ctx, error):
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send('Atmak için birini seçin')
+    elif isinstance(error, commands.MissingPermissions):
+        await ctx.send('Buna yetkin yok.')
 
 bot.run("Buraya botun tokenini yazın")
 #tokeni bulmak için https://discord.com/developers kısmına girin. 
