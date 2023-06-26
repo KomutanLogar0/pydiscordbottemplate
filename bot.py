@@ -25,6 +25,7 @@ async def merhaba(msg):
 #burada mesajı yanıtlamadan direk mesaj gönderiyoruz
 
 bot.run("Buraya botun tokenini yazın")
+#tokeni bulmak için https://discord.com/developers kısmına girin. 
 
 
 
